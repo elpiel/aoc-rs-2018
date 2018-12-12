@@ -1,5 +1,5 @@
 [workspace]
 
 members = [
-    "advent-day-one",
+    "aoc_day_one",
 ]
