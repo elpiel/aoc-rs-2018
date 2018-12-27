@@ -19,6 +19,37 @@ pub fn calculate_checksum(boxes_input: &Vec<String>) -> i32 {
     twice_count * trice_count
 }
 
+pub fn find_common_correct_box_id_part(boxes_input: &Vec<String>) -> String {
+
+    for (index, box_id) in boxes_input.iter().enumerate() {
+        let found = boxes_input.iter().skip(index+1).find_map(|searched_box_id| {
+
+            let similar_chars = box_id.chars().enumerate().filter_map(|(index, box_char)| {
+                if searched_box_id.chars().nth(index).unwrap() == box_char {
+                    return Some(box_char);
+                }
+                None
+            }).collect::<String>();
+
+            match &similar_chars.chars().count() + 1 == box_id.len() {
+                true => Some(similar_chars),
+                false => None,
+            }
+        });
+
+        if found.is_some() {
+
+        }
+
+        match found {
+            Some(found_similarity_string) => return found_similarity_string,
+            _ => {},
+        }
+    }
+
+    "".to_owned()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -33,6 +64,14 @@ mod tests {
             "abcdef".to_owned(), "bababc".to_owned(), "abbcde".to_owned(), "abcccd".to_owned(),
             "aabcdd".to_owned(), "abcdee".to_owned(), "ababab".to_owned()];
         assert_eq!(calculate_checksum(&example_input), 12);
+    }
+
+    #[test]
+    fn finds_common_sing_char_difference_box_id_part() {
+        let example_input = vec!["abcde".to_owned(), "fghij".to_owned(), "klmno".to_owned(),
+                             "pqrst".to_owned(), "fguij".to_owned(), "axcye".to_owned(),
+                             "wvxyz".to_owned()];
+        assert_eq!(find_common_correct_box_id_part(&example_input), "fgij".to_owned());
     }
 }
 

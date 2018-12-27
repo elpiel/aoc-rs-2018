@@ -1,4 +1,4 @@
-use aoc_day_two::{calculate_checksum};
+use aoc_day_two::*;
 use std::fs::File;
 use std::path::Path;
 use std::io::{BufRead, BufReader};
@@ -20,4 +20,5 @@ fn main () {
     }).collect();
 
     println!("Part 1: {}", calculate_checksum(&input_box_ids));
+    println!("Part 2: {}", find_common_correct_box_id_part(&input_box_ids));
 }
