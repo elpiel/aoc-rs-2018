@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::string::String;
 
 pub fn calculate_checksum(boxes_input: &Vec<String>) -> i32 {
     let (twice_count, trice_count) = boxes_input.iter().fold((0, 0), |(mut twice, mut trice), box_id| {
@@ -9,15 +10,8 @@ pub fn calculate_checksum(boxes_input: &Vec<String>) -> i32 {
                 letters_map
             });
 
-        twice += letters.values().find_map(|&count| match count {
-            2 => Some(1),
-            _ => None,
-        }).unwrap_or(0);
-
-        trice += letters.values().find_map(|&count| match count {
-            3 => Some(1),
-            _ => None,
-        }).unwrap_or(0);
+        twice += letters.values().any(|&count| count == 2) as i32;
+        trice += letters.values().any(|&count| count == 3) as i32;
 
         (twice, trice)
     });
