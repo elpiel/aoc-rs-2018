@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/elpiel/aoc-rs-2018.svg?branch=master)](https://travis-ci.org/elpiel/aoc-rs-2018)
+
 # Advent of Code
 
 These are my solutions to the [Advent of code 2018](https://adventofcode.com/2018).
